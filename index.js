@@ -291,11 +291,11 @@ app.get('/', function(req, res){
 app.get('/auth/:tempPwd', function(req, res){
 
 	// must have tempPwd email and the tempPwd params must match
-//	if (
-//		req.session.tempPwd
-//		&& req.session.email
-//		&& req.session.tempPwd === req.params.tempPwd
-//		) { 
+	if (
+		req.session.tempPwd
+		&& req.session.email
+		&& req.session.tempPwd === req.params.tempPwd
+		) { 
 
 		// users email
 		var email = req.session.email;
@@ -367,18 +367,18 @@ app.get('/api/memberships', function(req, res){
 app.get('/api/spaces', function(req, res){
 
 	// trying to get spaces but haven't authenticated yet
-//	if (
-//		!req.session.authenticated
-//		|| !req.session.email
-//		) {
+	if (
+		!req.session.authenticated
+		|| !req.session.email
+		) {
 
 		// create a temp pwd
-//		req.session.tempPwd = ShortId.generate();
+		req.session.tempPwd = ShortId.generate();
 
 		// let web app know to display verification steps
-//		res.json({
-//			responseCode: -1,
-//		});
+		res.json({
+			responseCode: -1,
+		});
 
 		// stop processing this route
 		return;
@@ -473,11 +473,11 @@ app.get('/api/auth/:email', function(req, res){
 	}
 
 	// error if session doesn't have a temp password set
-//	if (!req.session.tempPwd) {
-//		log.error('email auth: no tempPwd set: "'+email+'"');
-//		res.status(401).send('Unauthorized');
-//		return;
-//	}
+	if (!req.session.tempPwd) {
+		log.error('email auth: no tempPwd set: "'+email+'"');
+		res.status(401).send('Unauthorized');
+		return;
+	}
 
 	// function to send validation message to user
 	var sendValidation = function() {
